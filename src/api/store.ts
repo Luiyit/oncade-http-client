@@ -17,6 +17,8 @@ import {
   InitiatePurchaseResponse,
   GetPurchaseDetailsRequest,
   GetPurchaseDetailsResponse,
+  UpdateProductSaleStateRequest,
+  UpdateProductSaleStateResponse,
 } from '../types';
 
 export class StoreAPI {
@@ -170,6 +172,27 @@ export class StoreAPI {
     }
     const response = await this.httpClient.get<GetPurchaseDetailsResponse>(
       `/v1/purchases/${request.purchaseId}`
+    );
+    return response.data;
+  }
+
+  /**
+   * Update product sale state
+   * @param request - Update product sale state parameters
+   * @returns Promise with updated product response
+   */
+  async updateProductSaleState(request: UpdateProductSaleStateRequest): Promise<UpdateProductSaleStateResponse> {
+    if (!request.productId || request.forSale == null) {
+      throw new Error('Product ID and forSale state are required');
+    }
+    const response = await this.httpClient.put<UpdateProductSaleStateResponse>(
+      '/v1/products',
+      request,
+      {
+        headers: {
+          'Idempotency-Key': generateIdempotencyKey(),
+        },
+      }
     );
     return response.data;
   }

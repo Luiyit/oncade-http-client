@@ -56,6 +56,7 @@ export interface CreateProductRequest {
   description: string;
   price: number;
   category: string;
+  planId?: string;
 }
 
 export type CreateProductResponse = Product;
@@ -115,3 +116,10 @@ export interface GetPurchaseDetailsResponse {
   /** Purchase details */
   purchase: Purchase;
 }
+
+export interface UpdateProductSaleStateRequest {
+  productId: string;
+  forSale: boolean;
+}
+
+export type UpdateProductSaleStateResponse = Product;
