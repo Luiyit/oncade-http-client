@@ -15,6 +15,7 @@ export interface Product {
   price: number;
   metadata: {
     idempotencyKey: string;
+    [key: string]: any;
   };
   perUserLimit: number;
   isVisible: boolean;
@@ -27,6 +28,7 @@ export interface Product {
   category?: string;
   content?: string;
   userRef?: string;
+  imageUrl?: string;
 }
 
 export interface Purchase {
@@ -56,6 +58,11 @@ export interface CreateProductRequest {
   description: string;
   price: number;
   category: string;
+  imageUrl?: string;
+  perUserLimit?: number;
+  metadata?: {
+    [key: string]: any;
+  };
   planId?: string;
 }
 
