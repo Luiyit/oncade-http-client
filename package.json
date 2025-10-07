@@ -1,6 +1,6 @@
 {
   "name": "oncade-http-client",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A TypeScript API client for Oncade",
   "main": "dist/index.cjs",
   "module": "dist/index.esm.js",
