@@ -45,9 +45,6 @@ export class HttpClient {
         if (this.config.version) {
           config.headers['X-Oncade-API-Version'] = this.config.version;
         }
-
-        console.log(config);
-
         return config;
       },
       (error) => {
@@ -98,9 +95,6 @@ export class HttpClient {
         ...config?.headers,
       },
     };
-
-    console.log("POST Request:");
-    console.log(axiosConfig);
 
     const response = await this.axiosInstance.post(url, data, axiosConfig);
     return response;

@@ -75,6 +75,9 @@ export interface CreateUGCProductRequest {
   description: string;
   price: number;
   content: string;
+  metadata?: {
+    [key: string]: any;
+  };
 }
 
 export type CreateUGCProductResponse = Product;

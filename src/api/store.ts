@@ -68,9 +68,22 @@ export class StoreAPI {
     if (!userRef) {
       throw new Error('User reference is required');
     }
-    if (!request.name || !request.type || !request.fulfillmentType || !request.description || request.price == null || !request.content) {
+
+    if (
+      !request.name || 
+      !request.type || 
+      !request.fulfillmentType || 
+      request.price == null || 
+      typeof request.description !== 'string' || 
+      typeof request.content !== 'string'
+    ){
       throw new Error('All required fields must be provided for UGC product creation');
     }
+    
+    if(request.price < 100){
+      throw new Error('Price must be at least (1.00 USD)');
+    }
+    
     const response = await this.httpClient.post<CreateUGCProductResponse>(
       `/v1/products/${userRef}`,
       request,
