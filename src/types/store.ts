@@ -89,10 +89,11 @@ export interface SubmitProductForReviewRequest {
 
 export type SubmitProductForReviewResponse = Product;
 
+type ReviewProductDecision = 'approve' | 'decline';
 export interface ReviewProductRequest {
   userRef: string;
   productId: string;
-  decision: string;
+  decision: ReviewProductDecision;
 }
 
 export type ReviewProductResponse = Product;
