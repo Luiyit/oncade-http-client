@@ -59,8 +59,8 @@ export interface ListCashoutsResponse {
 }
 
 export interface ApproveCashoutRequest {
-  /** Cashout ID */
-  cashoutId: string;
+  /** Cashout request ID */
+  cashoutRequestId: string;
 }
 
 export interface ApproveCashoutResponse {
@@ -68,12 +68,12 @@ export interface ApproveCashoutResponse {
   cashout: Cashout;
 }
 
-export interface CancelCashoutRequest {
-  /** Cashout ID */
-  cashoutId: string;
+export interface RejectCashoutRequest {
+  /** Cashout request ID */
+  cashoutRequestId: string;
 }
 
-export interface CancelCashoutResponse {
+export interface RejectCashoutResponse {
   /** Updated cashout */
   cashout: Cashout;
 }

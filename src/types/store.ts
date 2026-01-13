@@ -141,3 +141,36 @@ export interface UpdateProductSaleStateRequest {
 }
 
 export type UpdateProductSaleStateResponse = Product;
+
+/**
+ * Request parameters for updating a product
+ */
+export interface UpdateProductRequest {
+  /** Product ID */
+  productId: string;
+  /** Product name */
+  name?: string;
+  /** Product description */
+  description?: string;
+  /** Product price */
+  price?: number;
+  /** Product category */
+  category?: string;
+  /** Product image URL */
+  imageUrl?: string;
+  /** Per user limit */
+  perUserLimit?: number;
+  /** Product visibility */
+  isVisible?: boolean;
+  /** Price visibility */
+  isPriceVisible?: boolean;
+  /** For sale status */
+  forSale?: boolean;
+  /** Product metadata */
+  metadata?: Record<string, string | number | boolean>;
+}
+
+/**
+ * Response for updating a product
+ */
+export type UpdateProductResponse = Product;

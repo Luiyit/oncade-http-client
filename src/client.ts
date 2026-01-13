@@ -11,6 +11,10 @@ import { DebitAPI } from './api/debit';
 import { CashoutAPI } from './api/cashout';
 import { AffiliateAPI } from './api/affiliate';
 import { CheckoutAPI } from './api/checkout';
+import { GameAPI } from './api/game';
+import { CampaignAPI } from './api/campaign';
+import { SubscriptionAPI } from './api/subscription';
+import { VCPurchaseAPI } from './api/vcpurchase';
 import { OncadeConfig } from './types';
 
 export class OncadeClient {
@@ -27,6 +31,10 @@ export class OncadeClient {
   public readonly cashout: CashoutAPI;
   public readonly affiliate: AffiliateAPI;
   public readonly checkout: CheckoutAPI;
+  public readonly game: GameAPI;
+  public readonly campaign: CampaignAPI;
+  public readonly subscription: SubscriptionAPI;
+  public readonly vcPurchase: VCPurchaseAPI;
 
   constructor(config: OncadeConfig) {
     this.httpClient = new HttpClient(config);
@@ -42,6 +50,10 @@ export class OncadeClient {
     this.cashout = new CashoutAPI(this.httpClient);
     this.affiliate = new AffiliateAPI(this.httpClient);
     this.checkout = new CheckoutAPI(this.httpClient);
+    this.game = new GameAPI(this.httpClient);
+    this.campaign = new CampaignAPI(this.httpClient);
+    this.subscription = new SubscriptionAPI(this.httpClient);
+    this.vcPurchase = new VCPurchaseAPI(this.httpClient);
   }
 
   /**
@@ -82,6 +94,14 @@ export class OncadeClient {
    */
   setGameId(gameId: string): void {
     this.updateConfig({ gameId });
+  }
+
+  /**
+   * Set campaign ID
+   * @param campaignId - Campaign ID for API requests
+   */
+  setCampaignId(campaignId: string): void {
+    this.updateConfig({ campaignId });
   }
 
   /**

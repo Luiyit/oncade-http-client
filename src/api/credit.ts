@@ -18,7 +18,7 @@ export class CreditAPI {
       throw new Error('Currency ID, user reference, and amount are required');
     }
     const response = await this.httpClient.post<CreateCreditResponse>(
-      '/v1/credits',
+      '/v1/vc/credits',
       request,
       {
         headers: {

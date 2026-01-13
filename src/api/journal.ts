@@ -14,7 +14,7 @@ export class JournalAPI {
    */
   async listJournals(request?: ListJournalsRequest): Promise<ListJournalsResponse> {
     const response = await this.httpClient.get<ListJournalsResponse>(
-      '/v1/journals',
+      '/v1/vc/journals',
       { params: request }
     );
     return response.data;

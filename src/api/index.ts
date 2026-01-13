@@ -10,3 +10,7 @@ export * from './debit';
 export * from './cashout';
 export * from './affiliate';
 export * from './checkout';
+export * from './game';
+export * from './campaign';
+export * from './subscription';
+export * from './vcpurchase';

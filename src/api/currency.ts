@@ -22,7 +22,7 @@ export class CurrencyAPI {
       throw new Error('All required fields must be provided for currency creation');
     }
     const response = await this.httpClient.post<CreateCurrencyResponse>(
-      '/v1/currencies',
+      '/v1/vc/currencies',
       request,
       {
         headers: {
@@ -40,7 +40,7 @@ export class CurrencyAPI {
    */
   async listCurrencies(request?: ListCurrenciesRequest): Promise<ListCurrenciesResponse> {
     const response = await this.httpClient.get<ListCurrenciesResponse>(
-      '/v1/currencies',
+      '/v1/vc/currencies',
       { params: request }
     );
     return response.data;
@@ -57,7 +57,7 @@ export class CurrencyAPI {
     }
     const { currencyId, ...updateData } = request;
     const response = await this.httpClient.patch<UpdateCurrencyResponse>(
-      `/v1/currencies/${currencyId}`,
+      `/v1/vc/currencies/${currencyId}`,
       updateData,
       {
         headers: {

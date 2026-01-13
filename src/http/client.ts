@@ -41,6 +41,11 @@ export class HttpClient {
           config.headers['X-Game-Id'] = this.config.gameId;
         }
 
+        // Add campaign ID header
+        if (this.config.campaignId) {
+          config.headers['X-Campaign-Id'] = this.config.campaignId;
+        }
+
         // Add API version
         if (this.config.version) {
           config.headers['X-Oncade-API-Version'] = this.config.version;

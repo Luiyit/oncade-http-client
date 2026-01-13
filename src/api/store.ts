@@ -21,6 +21,8 @@ import {
   UpdateProductSaleStateResponse,
   GetProductRequest,
   GetProductResponse,
+  UpdateProductRequest,
+  UpdateProductResponse,
 } from '../types';
 
 export class StoreAPI {
@@ -49,7 +51,7 @@ export class StoreAPI {
       throw new Error('Product ID is required');
     }
     const response = await this.httpClient.get<GetProductResponse>(
-      `/v1/products/${request.productId}`
+      `/v1/product/${request.productId}`
     );
     return response.data;
   }
@@ -64,8 +66,30 @@ export class StoreAPI {
       throw new Error('All required fields must be provided for product creation');
     }
     const response = await this.httpClient.post<CreateProductResponse>(
-      '/v1/products',
+      '/v1/product',
       request,
+      {
+        headers: {
+          'Idempotency-Key': generateIdempotencyKey(),
+        },
+      }
+    );
+    return response.data;
+  }
+
+  /**
+   * Update a product
+   * @param request - Product update parameters
+   * @returns Promise with updated product response
+   */
+  async updateProduct(request: UpdateProductRequest): Promise<UpdateProductResponse> {
+    if (!request.productId) {
+      throw new Error('Product ID is required');
+    }
+    const { productId, ...updateData } = request;
+    const response = await this.httpClient.patch<UpdateProductResponse>(
+      `/v1/product/${productId}`,
+      updateData,
       {
         headers: {
           'Idempotency-Key': generateIdempotencyKey(),

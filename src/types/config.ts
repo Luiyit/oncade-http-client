@@ -7,6 +7,8 @@ export interface OncadeConfig {
   bearerToken?: string;
   /** Game ID for API requests */
   gameId?: string;
+  /** Campaign ID for campaign API requests */
+  campaignId?: string;
   /** Timeout for requests in milliseconds */
   timeout?: number;
   /** Additional headers to include in requests */

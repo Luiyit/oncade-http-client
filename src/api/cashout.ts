@@ -7,8 +7,8 @@ import {
   ListCashoutsResponse,
   ApproveCashoutRequest,
   ApproveCashoutResponse,
-  CancelCashoutRequest,
-  CancelCashoutResponse,
+  RejectCashoutRequest,
+  RejectCashoutResponse,
 } from '../types';
 
 export class CashoutAPI {
@@ -24,7 +24,7 @@ export class CashoutAPI {
       throw new Error('All required fields must be provided for cashout creation');
     }
     const response = await this.httpClient.post<CreateCashoutResponse>(
-      '/v1/cashouts',
+      '/v1/vc/cashouts',
       request,
       {
         headers: {
@@ -42,7 +42,7 @@ export class CashoutAPI {
    */
   async listCashouts(request?: ListCashoutsRequest): Promise<ListCashoutsResponse> {
     const response = await this.httpClient.get<ListCashoutsResponse>(
-      '/v1/cashouts',
+      '/v1/vc/cashouts',
       { params: request }
     );
     return response.data;
@@ -54,11 +54,11 @@ export class CashoutAPI {
    * @returns Promise with approved cashout response
    */
   async approveCashout(request: ApproveCashoutRequest): Promise<ApproveCashoutResponse> {
-    if (!request.cashoutId) {
-      throw new Error('Cashout ID is required');
+    if (!request.cashoutRequestId) {
+      throw new Error('Cashout request ID is required');
     }
     const response = await this.httpClient.post<ApproveCashoutResponse>(
-      `/v1/cashouts/${request.cashoutId}/approve`,
+      `/v1/vc/cashouts/${request.cashoutRequestId}/approve`,
       {},
       {
         headers: {
@@ -70,16 +70,16 @@ export class CashoutAPI {
   }
 
   /**
-   * Cancel a cashout
-   * @param request - Cancel cashout parameters
-   * @returns Promise with cancelled cashout response
+   * Reject a cashout
+   * @param request - Reject cashout parameters
+   * @returns Promise with rejected cashout response
    */
-  async cancelCashout(request: CancelCashoutRequest): Promise<CancelCashoutResponse> {
-    if (!request.cashoutId) {
-      throw new Error('Cashout ID is required');
+  async rejectCashout(request: RejectCashoutRequest): Promise<RejectCashoutResponse> {
+    if (!request.cashoutRequestId) {
+      throw new Error('Cashout request ID is required');
     }
-    const response = await this.httpClient.post<CancelCashoutResponse>(
-      `/v1/cashouts/${request.cashoutId}/cancel`,
+    const response = await this.httpClient.post<RejectCashoutResponse>(
+      `/v1/vc/cashouts/${request.cashoutRequestId}/reject`,
       {},
       {
         headers: {

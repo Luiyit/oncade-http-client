@@ -17,7 +17,7 @@ export class BalanceAPI {
       throw new Error('Currency ID and user reference are required');
     }
     const response = await this.httpClient.get<GetBalanceResponse>(
-      '/v1/balances',
+      '/v1/vc/balances',
       { params: request }
     );
     return response.data;
