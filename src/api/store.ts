@@ -19,6 +19,8 @@ import {
   GetPurchaseDetailsResponse,
   UpdateProductSaleStateRequest,
   UpdateProductSaleStateResponse,
+  GetProductRequest,
+  GetProductResponse,
 } from '../types';
 
 export class StoreAPI {
@@ -33,6 +35,21 @@ export class StoreAPI {
     const response = await this.httpClient.get<ListProductsResponse>(
       '/v1/products',
       { params: request }
+    );
+    return response.data;
+  }
+
+  /**
+   * Get product by ID
+   * @param request - Get product request parameters
+   * @returns Promise with product response
+   */
+  async getProduct(request: GetProductRequest): Promise<GetProductResponse> {
+    if (!request.productId) {
+      throw new Error('Product ID is required');
+    }
+    const response = await this.httpClient.get<GetProductResponse>(
+      `/v1/products/${request.productId}`
     );
     return response.data;
   }

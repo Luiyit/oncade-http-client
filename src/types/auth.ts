@@ -30,3 +30,40 @@ export interface GetLinkStatusResponse {
     linkedAt: string;
   };
 }
+
+export interface ApproveLinkRequest {
+  /** Session key from the initiate response */
+  sessionKey: string;
+}
+
+export interface ApproveLinkResponse {
+  /** Success status */
+  success: boolean;
+  /** User information after approval */
+  user?: {
+    id: string;
+    email: string;
+    gameId: string;
+    linkedAt: string;
+  };
+}
+
+export interface DeclineLinkRequest {
+  /** Session key from the initiate response */
+  sessionKey: string;
+}
+
+export interface DeclineLinkResponse {
+  /** Success status */
+  success: boolean;
+}
+
+export interface RemoveLinkRequest {
+  /** User reference */
+  userRef: string;
+}
+
+export interface RemoveLinkResponse {
+  /** Success status */
+  success: boolean;
+}

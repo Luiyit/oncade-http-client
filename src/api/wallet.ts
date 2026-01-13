@@ -5,6 +5,10 @@ import {
   GetUserBalanceResponse,
   GetWithdrawLinkRequest,
   GetWithdrawLinkResponse,
+  InitiateWalletPurchaseRequest,
+  InitiateWalletPurchaseResponse,
+  GetWalletPurchaseRequest,
+  GetWalletPurchaseResponse,
 } from '../types';
 
 export class WalletAPI {
@@ -48,6 +52,42 @@ export class WalletAPI {
           'Idempotency-Key': generateIdempotencyKey(),
         },
       }
+    );
+    return response.data;
+  }
+
+  /**
+   * Initiate wallet purchase
+   * @param request - Wallet purchase initiation parameters
+   * @returns Promise with wallet purchase response
+   */
+  async initiateWalletPurchase(request: InitiateWalletPurchaseRequest): Promise<InitiateWalletPurchaseResponse> {
+    if (!request.userId || !request.itemId) {
+      throw new Error('User ID and item ID are required');
+    }
+    const response = await this.httpClient.post<InitiateWalletPurchaseResponse>(
+      '/v1/wallet/purchase',
+      request,
+      {
+        headers: {
+          'Idempotency-Key': generateIdempotencyKey(),
+        },
+      }
+    );
+    return response.data;
+  }
+
+  /**
+   * Get wallet purchase details
+   * @param request - Wallet purchase details parameters
+   * @returns Promise with wallet purchase details response
+   */
+  async getWalletPurchase(request: GetWalletPurchaseRequest): Promise<GetWalletPurchaseResponse> {
+    if (!request.purchaseId) {
+      throw new Error('Purchase ID is required');
+    }
+    const response = await this.httpClient.get<GetWalletPurchaseResponse>(
+      `/v1/wallet/purchase/${request.purchaseId}`
     );
     return response.data;
   }

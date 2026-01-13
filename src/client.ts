@@ -3,6 +3,14 @@ import { AuthAPI } from './api/auth';
 import { StoreAPI } from './api/store';
 import { UserAPI } from './api/user';
 import { WalletAPI } from './api/wallet';
+import { CurrencyAPI } from './api/currency';
+import { BalanceAPI } from './api/balance';
+import { JournalAPI } from './api/journal';
+import { CreditAPI } from './api/credit';
+import { DebitAPI } from './api/debit';
+import { CashoutAPI } from './api/cashout';
+import { AffiliateAPI } from './api/affiliate';
+import { CheckoutAPI } from './api/checkout';
 import { OncadeConfig } from './types';
 
 export class OncadeClient {
@@ -11,6 +19,14 @@ export class OncadeClient {
   public readonly store: StoreAPI;
   public readonly user: UserAPI;
   public readonly wallet: WalletAPI;
+  public readonly currency: CurrencyAPI;
+  public readonly balance: BalanceAPI;
+  public readonly journal: JournalAPI;
+  public readonly credit: CreditAPI;
+  public readonly debit: DebitAPI;
+  public readonly cashout: CashoutAPI;
+  public readonly affiliate: AffiliateAPI;
+  public readonly checkout: CheckoutAPI;
 
   constructor(config: OncadeConfig) {
     this.httpClient = new HttpClient(config);
@@ -18,6 +34,14 @@ export class OncadeClient {
     this.store = new StoreAPI(this.httpClient);
     this.user = new UserAPI(this.httpClient);
     this.wallet = new WalletAPI(this.httpClient);
+    this.currency = new CurrencyAPI(this.httpClient);
+    this.balance = new BalanceAPI(this.httpClient);
+    this.journal = new JournalAPI(this.httpClient);
+    this.credit = new CreditAPI(this.httpClient);
+    this.debit = new DebitAPI(this.httpClient);
+    this.cashout = new CashoutAPI(this.httpClient);
+    this.affiliate = new AffiliateAPI(this.httpClient);
+    this.checkout = new CheckoutAPI(this.httpClient);
   }
 
   /**

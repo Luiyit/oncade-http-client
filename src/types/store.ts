@@ -51,6 +51,13 @@ export interface ListProductsResponse {
   products: Product[];
 }
 
+export interface GetProductRequest {
+  /** Product ID */
+  productId: string;
+}
+
+export type GetProductResponse = Product;
+
 export interface CreateProductRequest {
   name: string;
   type: ProductType;
