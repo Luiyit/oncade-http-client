@@ -51,7 +51,6 @@ export class HttpClient {
           config.headers['X-Oncade-API-Version'] = this.config.version;
         }
 
-        console.log('Request interceptor', config);
         return config;
       },
       (error) => {
@@ -90,7 +89,6 @@ export class HttpClient {
       },
     };
 
-    console.log('GET request:', url, this.config.headers, config?.headers);
     const response = await this.axiosInstance.get(url, axiosConfig);
     return response;
   }

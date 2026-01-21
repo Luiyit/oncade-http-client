@@ -34,8 +34,6 @@ export class CheckoutAPI {
     if (!request.gameId || !request.itemId) {
       throw new Error('Game ID and item ID are required');
     }
-    
-    console.log('CheckoutAPI constructor', this.httpClient);
 
     const response = await this.httpClient.get<GetCheckoutRedirectResponse>(
       '/v1/checkout/redirect',

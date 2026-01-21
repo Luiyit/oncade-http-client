@@ -49,15 +49,7 @@ export interface GetCheckoutRedirectRequest {
 }
 
 export interface GetCheckoutRedirectResponse {
-  /** HTTP status */
-  status: number;
-  /** Response headers */
-  headers: {
-    Location: string;
-  };
-  /** Response body */
-  body: {
-    url: string;
-  };
+  /** Redirect URL */
+  url: string;
 }
 
