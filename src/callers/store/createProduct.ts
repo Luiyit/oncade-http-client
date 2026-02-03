@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -31,19 +31,19 @@ async function main() {
       perUserLimit: 10,
     };
 
-    console.log('📦 Creating product with mock data:');
-    console.log(JSON.stringify(mockProduct, null, 2));
-    console.log('\n⏳ Calling API...\n');
+    console.info('📦 Creating product with mock data:');
+    console.info(JSON.stringify(mockProduct, null, 2));
+    console.info('\n⏳ Calling API...\n');
 
     const response = await client.store.createProduct(mockProduct);
 
-    console.log('✅ Success! Product created:\n');
-    console.log('📋 Summary:');
-    console.log(`   Product ID: ${response._id}`);
-    console.log(`   Name: ${response.name}`);
-    console.log(`   Price: $${(response.price / 100).toFixed(2)}`);
-    console.log(`   Status: ${response.status}`);
-    console.log(`   For Sale: ${response.forSale}`);
+    console.info('✅ Success! Product created:\n');
+    console.info('📋 Summary:');
+    console.info(`   Product ID: ${response._id}`);
+    console.info(`   Name: ${response.name}`);
+    console.info(`   Price: $${(response.price / 100).toFixed(2)}`);
+    console.info(`   Status: ${response.status}`);
+    console.info(`   For Sale: ${response.forSale}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

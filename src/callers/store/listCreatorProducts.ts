@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -22,27 +22,27 @@ async function main() {
     // User reference from environment or mock
     const userRef = process.env.ONCADE_LUIYIT_USER_REF || process.env.ONCADE_USER_REF || 'test_user_ref';
 
-    console.log(`👤 Listing products for creator: ${userRef}\n`);
-    console.log('⏳ Calling API...\n');
+    console.info(`👤 Listing products for creator: ${userRef}\n`);
+    console.info('⏳ Calling API...\n');
 
     const response = await client.store.listCreatorProducts({ userRef });
 
-    console.log('✅ Success! Creator products retrieved:');
-    console.log(`   Total Products: ${response.products.length}\n`);
+    console.info('✅ Success! Creator products retrieved:');
+    console.info(`   Total Products: ${response.products.length}\n`);
 
     if (response.products.length > 0) {
-      console.log('📦 Products:');
+      console.info('📦 Products:');
       response.products.forEach((product, index) => {
-        console.log(`\n   ${index + 1}. ${product.name}`);
-        console.log(`      ID: ${product._id}`);
-        console.log(`      Type: ${product.type}`);
-        console.log(`      Status: ${product.status}`);
-        console.log(`      Price: $${(product.price / 100).toFixed(2)}`);
-        console.log(`      For Sale: ${product.forSale}`);
-        console.log(`      Created: ${product.createdAt}`);
+        console.info(`\n   ${index + 1}. ${product.name}`);
+        console.info(`      ID: ${product._id}`);
+        console.info(`      Type: ${product.type}`);
+        console.info(`      Status: ${product.status}`);
+        console.info(`      Price: $${(product.price / 100).toFixed(2)}`);
+        console.info(`      For Sale: ${product.forSale}`);
+        console.info(`      Created: ${product.createdAt}`);
       });
     } else {
-      console.log('   No products found for this creator');
+      console.info('   No products found for this creator');
     }
 
   } catch (error) {

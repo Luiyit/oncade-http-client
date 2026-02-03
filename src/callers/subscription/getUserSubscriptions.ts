@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -24,9 +24,9 @@ async function main() {
     const limit = parseInt(process.env.ONCADE_LIMIT || '10');
     const offset = parseInt(process.env.ONCADE_OFFSET || '0');
 
-    console.log(`📋 Getting subscriptions for user: ${userRef}`);
-    console.log(`   Limit: ${limit}, Offset: ${offset}\n`);
-    console.log('⏳ Calling API...\n');
+    console.info(`📋 Getting subscriptions for user: ${userRef}`);
+    console.info(`   Limit: ${limit}, Offset: ${offset}\n`);
+    console.info('⏳ Calling API...\n');
 
     const response = await client.subscription.getUserSubscriptions({
       userRef,
@@ -34,19 +34,19 @@ async function main() {
       offset,
     });
 
-    console.log('✅ Success! User subscriptions retrieved');
-    console.log(`   Returned: ${response.subscriptions.length}\n`);
+    console.info('✅ Success! User subscriptions retrieved');
+    console.info(`   Returned: ${response.subscriptions.length}\n`);
 
     if (response.subscriptions.length > 0) {
-      console.log('📦 Subscriptions:');
+      console.info('📦 Subscriptions:');
       response.subscriptions.forEach((sub, index) => {
-        console.log(`\n   ${index + 1}. Subscription ID: ${sub.subscriptionId}`);
-        console.log(`      Item ID: ${sub.itemId}`);
-        console.log(`      Status: ${sub.status}`);
-        console.log(`      Plan: ${sub.planCode} (${sub.planId})`);
+        console.info(`\n   ${index + 1}. Subscription ID: ${sub.subscriptionId}`);
+        console.info(`      Item ID: ${sub.itemId}`);
+        console.info(`      Status: ${sub.status}`);
+        console.info(`      Plan: ${sub.planCode} (${sub.planId})`);
       });
     } else {
-      console.log('   No subscriptions found for this user');
+      console.info('   No subscriptions found for this user');
     }
 
   } catch (error) {

@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -24,22 +24,22 @@ async function main() {
 
     if (!sessionKey) {
       console.error('⚠️  ONCADE_USER_SESSION_KEY environment variable is required');
-      console.log('\n💡 Run initiateAccountLink first to get a session key:');
-      console.log('   npx tsx src/callers/auth/initiateAccountLink.ts');
+      console.info('\n💡 Run initiateAccountLink first to get a session key:');
+      console.info('   npx tsx src/callers/auth/initiateAccountLink.ts');
       process.exit(1);
     }
 
-    console.log('✅ Approving account link');
-    console.log(`   Session Key: ${sessionKey.substring(0, 20)}...`);
-    console.log('\n⏳ Calling API...\n');
+    console.info('✅ Approving account link');
+    console.info(`   Session Key: ${sessionKey.substring(0, 20)}...`);
+    console.info('\n⏳ Calling API...\n');
 
     const response = await client.auth.approveLink({
       sessionKey,
     });
 
-    console.log('✅ Success! Account link approved:\n');
-    console.log('📋 Summary:');
-    console.log(`   Success: ${response.success}`);
+    console.info('✅ Success! Account link approved:\n');
+    console.info('📋 Summary:');
+    console.info(`   Success: ${response.success}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

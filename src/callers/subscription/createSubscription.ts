@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -28,23 +28,23 @@ async function main() {
                     process.env.ONCADE_SUBSCRIPTION_PRODUCT_ID || 
                     'test_item_id';
 
-    console.log('📝 Creating subscription');
-    console.log(`   User: ${userRef}`);
-    console.log(`   Item ID: ${itemId}\n`);
-    console.log('⏳ Calling API...\n');
+    console.info('📝 Creating subscription');
+    console.info(`   User: ${userRef}`);
+    console.info(`   Item ID: ${itemId}\n`);
+    console.info('⏳ Calling API...\n');
 
     const response = await client.subscription.createSubscription({
       userRef,
       itemId,
     });
 
-    console.log('✅ Success! Subscription created:\n');
-    console.log('📋 Summary:');
-    console.log(`   Subscription ID: ${response.subscription.subscriptionId}`);
-    console.log(`   Item ID: ${response.subscription.itemId}`);
-    console.log(`   Status: ${response.subscription.status}`);
-    console.log(`   Plan: ${response.subscription.planCode} (${response.subscription.planId})`);
-    if (response.message) console.log(`   Message: ${response.message}`);
+    console.info('✅ Success! Subscription created:\n');
+    console.info('📋 Summary:');
+    console.info(`   Subscription ID: ${response.subscription.subscriptionId}`);
+    console.info(`   Item ID: ${response.subscription.itemId}`);
+    console.info(`   Status: ${response.subscription.status}`);
+    console.info(`   Plan: ${response.subscription.planCode} (${response.subscription.planId})`);
+    if (response.message) console.info(`   Message: ${response.message}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

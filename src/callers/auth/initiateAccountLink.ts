@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -23,22 +23,22 @@ async function main() {
     const email = process.env.ONCADE_USER_EMAIL || 'test@example.com';
     const sessionKey = process.env.ONCADE_USER_SESSION_KEY;
 
-    console.log('🔗 Initiating account link');
-    console.log(`   Email: ${email}`);
-    if (sessionKey) console.log(`   Session Key: ${sessionKey.substring(0, 20)}...`);
-    console.log('\n⏳ Calling API...\n');
+    console.info('🔗 Initiating account link');
+    console.info(`   Email: ${email}`);
+    if (sessionKey) console.info(`   Session Key: ${sessionKey.substring(0, 20)}...`);
+    console.info('\n⏳ Calling API...\n');
 
     const response = await client.auth.initiateAccountLink({
       email,
       sessionKey,
     });
 
-    console.log('✅ Success! Account link initiated:\n');
-    console.log('📋 Summary:');
-    console.log(`   Session Key: ${response.sessionKey}`);
-    console.log(`   URL: ${response.url}`);
-    console.log('\n💡 Use this session key with getLinkStatus to check the link status');
-    console.log(`   Export it: export ONCADE_USER_SESSION_KEY="${response.sessionKey}"`);
+    console.info('✅ Success! Account link initiated:\n');
+    console.info('📋 Summary:');
+    console.info(`   Session Key: ${response.sessionKey}`);
+    console.info(`   URL: ${response.url}`);
+    console.info('\n💡 Use this session key with getLinkStatus to check the link status');
+    console.info(`   Export it: export ONCADE_USER_SESSION_KEY="${response.sessionKey}"`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

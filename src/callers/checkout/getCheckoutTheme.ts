@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -23,30 +23,30 @@ async function main() {
     const gameId = process.env.ONCADE_GAME_ID || 'test-game';
     const itemId = process.env.ONCADE_ITEM_ID || process.env.ONCADE_PRODUCT_ID || process.env.ONCADE_SUBSCRIPTION_PRODUCT_ID;
 
-    console.log('🎨 Fetching checkout theme');
-    console.log(`   Game ID: ${gameId}`);
+    console.info('🎨 Fetching checkout theme');
+    console.info(`   Game ID: ${gameId}`);
     if (itemId) {
-      console.log(`   Item ID: ${itemId}`);
+      console.info(`   Item ID: ${itemId}`);
     }
-    console.log('\n⏳ Calling API...\n');
+    console.info('\n⏳ Calling API...\n');
 
     const theme = await client.checkout.getCheckoutTheme({
       gameId,
       itemId,
     });
 
-    console.log('✅ Success! Checkout theme retrieved:');
-    console.log(JSON.stringify(theme, null, 2));
-    console.log('\n🎨 Theme Colors:');
-    console.log(`   Primary Button: ${theme.primaryButtonColor}`);
-    console.log(`   Secondary Button: ${theme.secondaryButtonColor}`);
-    console.log(`   Notify Button: ${theme.notifyButtonColor}`);
-    console.log(`   Background: ${theme.backgroundColor}`);
-    console.log(`   Border: ${theme.borderColor}`);
-    console.log(`   Price Override: ${theme.priceOverrideColor}`);
+    console.info('✅ Success! Checkout theme retrieved:');
+    console.info(JSON.stringify(theme, null, 2));
+    console.info('\n🎨 Theme Colors:');
+    console.info(`   Primary Button: ${theme.primaryButtonColor}`);
+    console.info(`   Secondary Button: ${theme.secondaryButtonColor}`);
+    console.info(`   Notify Button: ${theme.notifyButtonColor}`);
+    console.info(`   Background: ${theme.backgroundColor}`);
+    console.info(`   Border: ${theme.borderColor}`);
+    console.info(`   Price Override: ${theme.priceOverrideColor}`);
     
     if (theme.logoUrl) {
-      console.log(`\n🖼️  Logo: ${theme.logoUrl}`);
+      console.info(`\n🖼️  Logo: ${theme.logoUrl}`);
     }
 
   } catch (error) {

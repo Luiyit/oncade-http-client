@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -19,47 +19,47 @@ async function main() {
       gameId: process.env.ONCADE_GAME_ID,
     });
 
-    console.log('🎮 Fetching game information...\n');
-    console.log('⏳ Calling API...\n');
+    console.info('🎮 Fetching game information...\n');
+    console.info('⏳ Calling API...\n');
 
     const game = await client.game.getGame();
 
-    console.log('✅ Success! Game information retrieved:');
-    console.log('\n📋 Summary:');
-    console.log(`   Game ID: ${game.gameId}`);
-    console.log(`   Name: ${game.name}`);
-    console.log(`   Description: ${game.description}`);
-    console.log(`   Status: ${game.status}`);
-    console.log(`   Environment: ${game.environment}`);
-    console.log(`   Visible: ${game.isVisible}`);
-    console.log(`   Affiliate Rate: ${game.affiliateRate}%`);
-    console.log(`   Tip Enabled: ${game.enableTip}`);
+    console.info('✅ Success! Game information retrieved:');
+    console.info('\n📋 Summary:');
+    console.info(`   Game ID: ${game.gameId}`);
+    console.info(`   Name: ${game.name}`);
+    console.info(`   Description: ${game.description}`);
+    console.info(`   Status: ${game.status}`);
+    console.info(`   Environment: ${game.environment}`);
+    console.info(`   Visible: ${game.isVisible}`);
+    console.info(`   Affiliate Rate: ${game.affiliateRate}%`);
+    console.info(`   Tip Enabled: ${game.enableTip}`);
     
     if (game.steamAppId) {
-      console.log(`   Steam App ID: ${game.steamAppId}`);
+      console.info(`   Steam App ID: ${game.steamAppId}`);
     }
     if (game.discordUrl) {
-      console.log(`   Discord: ${game.discordUrl}`);
+      console.info(`   Discord: ${game.discordUrl}`);
     }
     if (game.demoUrl) {
-      console.log(`   Demo URL: ${game.demoUrl}`);
+      console.info(`   Demo URL: ${game.demoUrl}`);
     }
     
-    console.log(`\n📸 Images:`);
-    console.log(`   Main Image: ${game.imageUrl}`);
-    console.log(`   Small Image: ${game.smallImageUrl}`);
-    console.log(`   Store Image: ${game.storeImageUrl}`);
+    console.info(`\n📸 Images:`);
+    console.info(`   Main Image: ${game.imageUrl}`);
+    console.info(`   Small Image: ${game.smallImageUrl}`);
+    console.info(`   Store Image: ${game.storeImageUrl}`);
     
     if (game.screenshots && game.screenshots.length > 0) {
-      console.log(`\n📷 Screenshots: ${game.screenshots.length}`);
+      console.info(`\n📷 Screenshots: ${game.screenshots.length}`);
       game.screenshots.forEach((url, index) => {
-        console.log(`   ${index + 1}. ${url}`);
+        console.info(`   ${index + 1}. ${url}`);
       });
     }
 
-    console.log(`\n📅 Timestamps:`);
-    console.log(`   Created: ${game.createdAt}`);
-    console.log(`   Updated: ${game.updatedAt}`);
+    console.info(`\n📅 Timestamps:`);
+    console.info(`   Created: ${game.createdAt}`);
+    console.info(`   Updated: ${game.updatedAt}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

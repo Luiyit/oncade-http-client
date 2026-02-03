@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -24,30 +24,30 @@ async function main() {
 
     if (!session) {
       console.error('⚠️  ONCADE_USER_SESSION_KEY environment variable is required');
-      console.log('\n💡 Run initiateAccountLink first to get a session key:');
-      console.log('   npx tsx src/callers/auth/initiateAccountLink.ts');
+      console.info('\n💡 Run initiateAccountLink first to get a session key:');
+      console.info('   npx tsx src/callers/auth/initiateAccountLink.ts');
       process.exit(1);
     }
 
-    console.log('🔍 Getting account link status');
-    console.log(`   Session: ${session.substring(0, 20)}...`);
-    console.log('\n⏳ Calling API...\n');
+    console.info('🔍 Getting account link status');
+    console.info(`   Session: ${session.substring(0, 20)}...`);
+    console.info('\n⏳ Calling API...\n');
 
     const response = await client.auth.getLinkStatus({
       session,
     });
 
-    console.log(JSON.stringify(response, null, 2));
+    console.info(JSON.stringify(response, null, 2));
 
-    console.log('✅ Success! Link details retrieved:\n');
-    console.log('📋 Summary:');
-    console.log(`   Namespace: ${response.namespaceType}`);
-    if (response.gameId) console.log(`   Game ID: ${response.gameId}`);
-    if (response.gameName) console.log(`   Game: ${response.gameName}`);
-    console.log(`   Prefilled email: ${response.prefilledEmail}`);
-    if (response.userRef) console.log(`   User ref: ${response.userRef}`);
+    console.info('✅ Success! Link details retrieved:\n');
+    console.info('📋 Summary:');
+    console.info(`   Namespace: ${response.namespaceType}`);
+    if (response.gameId) console.info(`   Game ID: ${response.gameId}`);
+    if (response.gameName) console.info(`   Game: ${response.gameName}`);
+    console.info(`   Prefilled email: ${response.prefilledEmail}`);
+    if (response.userRef) console.info(`   User ref: ${response.userRef}`);
     if (response.spendPermission) {
-      console.log(`   Spend permission: ${response.spendPermission.tenantName} (${response.spendPermission.networkKey})`);
+      console.info(`   Spend permission: ${response.spendPermission.tenantName} (${response.spendPermission.networkKey})`);
     }
 
   } catch (error) {

@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -22,23 +22,23 @@ async function main() {
     // Use product ID from environment or a default mock ID
     const productId = process.env.ONCADE_PRODUCT_ID || process.env.ONCADE_SUBSCRIPTION_PRODUCT_ID || '69394e4b3bc19b79fff5de65';
 
-    console.log(`🔍 Fetching product: ${productId}\n`);
-    console.log('⏳ Calling API...\n');
+    console.info(`🔍 Fetching product: ${productId}\n`);
+    console.info('⏳ Calling API...\n');
 
     const product = await client.store.getProduct({ productId });
 
-    console.log('✅ Success! Product details:');
-    console.log(JSON.stringify(product, null, 2));
-    console.log('\n📋 Summary:');
-    console.log(`   ID: ${product._id}`);
-    console.log(`   Name: ${product.name}`);
-    console.log(`   Type: ${product.type}`);
-    console.log(`   Status: ${product.status}`);
-    console.log(`   Price: $${(product.price / 100).toFixed(2)}`);
-    console.log(`   Category: ${product.category || 'N/A'}`);
-    console.log(`   For Sale: ${product.forSale}`);
-    console.log(`   Fulfillment: ${product.fulfillmentType}`);
-    console.log(`   Created: ${product.createdAt}`);
+    console.info('✅ Success! Product details:');
+    console.info(JSON.stringify(product, null, 2));
+    console.info('\n📋 Summary:');
+    console.info(`   ID: ${product._id}`);
+    console.info(`   Name: ${product.name}`);
+    console.info(`   Type: ${product.type}`);
+    console.info(`   Status: ${product.status}`);
+    console.info(`   Price: $${(product.price / 100).toFixed(2)}`);
+    console.info(`   Category: ${product.category || 'N/A'}`);
+    console.info(`   For Sale: ${product.forSale}`);
+    console.info(`   Fulfillment: ${product.fulfillmentType}`);
+    console.info(`   Created: ${product.createdAt}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

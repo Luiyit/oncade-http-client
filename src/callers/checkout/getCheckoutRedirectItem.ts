@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -27,14 +27,14 @@ async function main() {
     const dealCode = process.env.ONCADE_DEAL_CODE;
     const checkoutMethod = process.env.ONCADE_CHECKOUT_METHOD as 'credit' | 'stripe' | 'paypal' | undefined;
 
-    console.log('🔗 Getting checkout redirect URL');
-    console.log(`   Game ID: ${gameId}`);
-    console.log(`   Item ID: ${itemId}`);
-    if (redirectUrl) console.log(`   Redirect URL: ${redirectUrl}`);
-    if (affiliateCode) console.log(`   Affiliate Code: ${affiliateCode}`);
-    if (dealCode) console.log(`   Deal Code: ${dealCode}`);
-    if (checkoutMethod) console.log(`   Checkout Method: ${checkoutMethod}`);
-    console.log('\n⏳ Calling API...\n');
+    console.info('🔗 Getting checkout redirect URL');
+    console.info(`   Game ID: ${gameId}`);
+    console.info(`   Item ID: ${itemId}`);
+    if (redirectUrl) console.info(`   Redirect URL: ${redirectUrl}`);
+    if (affiliateCode) console.info(`   Affiliate Code: ${affiliateCode}`);
+    if (dealCode) console.info(`   Deal Code: ${dealCode}`);
+    if (checkoutMethod) console.info(`   Checkout Method: ${checkoutMethod}`);
+    console.info('\n⏳ Calling API...\n');
 
     const response = await client.checkout.getCheckoutRedirect({
       gameId,
@@ -45,10 +45,10 @@ async function main() {
       checkoutMethod,
     });
 
-    console.log('✅ Success! Checkout redirect URL retrieved:\n');
-    console.log('📋 Summary:');
-    console.log(`   Checkout URL: ${response.url}`);
-    console.log('\n🌐 You can open this URL in a browser to proceed with checkout');
+    console.info('✅ Success! Checkout redirect URL retrieved:\n');
+    console.info('📋 Summary:');
+    console.info(`   Checkout URL: ${response.url}`);
+    console.info('\n🌐 You can open this URL in a browser to proceed with checkout');
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

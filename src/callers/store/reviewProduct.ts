@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -24,11 +24,11 @@ async function main() {
     const productId = process.env.ONCADE_PRODUCT_ID || process.env.ONCADE_SUBSCRIPTION_PRODUCT_ID || '69394e4b3bc19b79fff5de65';
     const decision = (process.env.ONCADE_REVIEW_DECISION as 'approve' | 'decline') || 'approve';
 
-    console.log(`⚖️  Reviewing product`);
-    console.log(`   User: ${userRef}`);
-    console.log(`   Product: ${productId}`);
-    console.log(`   Decision: ${decision}\n`);
-    console.log('⏳ Calling API...\n');
+    console.info(`⚖️  Reviewing product`);
+    console.info(`   User: ${userRef}`);
+    console.info(`   Product: ${productId}`);
+    console.info(`   Decision: ${decision}\n`);
+    console.info('⏳ Calling API...\n');
 
     const response = await client.store.reviewProduct({
       userRef,
@@ -36,12 +36,12 @@ async function main() {
       decision,
     });
 
-    console.log(`✅ Success! Product ${decision}d:\n');
-    console.log('📋 Summary:');
-    console.log(`   Product ID: ${response._id}`);
-    console.log(`   Name: ${response.name}`);
-    console.log(`   Status: ${response.status}`);
-    console.log(`   Creator: ${response.userRef}`);
+    console.info(`✅ Success! Product ${decision}d:\n');
+    console.info('📋 Summary:');
+    console.info(`   Product ID: ${response._id}`);
+    console.info(`   Name: ${response.name}`);
+    console.info(`   Status: ${response.status}`);
+    console.info(`   Creator: ${response.userRef}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

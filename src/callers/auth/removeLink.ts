@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -24,22 +24,22 @@ async function main() {
 
     if (!userRef) {
       console.error('⚠️  ONCADE_USER_REF environment variable is required');
-      console.log('\n💡 Set the user reference from a previous link:');
-      console.log('   export ONCADE_USER_REF="your-user-ref"');
+      console.info('\n💡 Set the user reference from a previous link:');
+      console.info('   export ONCADE_USER_REF="your-user-ref"');
       process.exit(1);
     }
 
-    console.log('🗑️  Removing account link');
-    console.log(`   User Reference: ${userRef}`);
-    console.log('\n⏳ Calling API...\n');
+    console.info('🗑️  Removing account link');
+    console.info(`   User Reference: ${userRef}`);
+    console.info('\n⏳ Calling API...\n');
 
     const response = await client.auth.removeLink({
       userRef,
     });
 
-    console.log('✅ Success! Account link removed:\n');
-    console.log('📋 Summary:');
-    console.log(`   Success: ${response.success}`);
+    console.info('✅ Success! Account link removed:\n');
+    console.info('📋 Summary:');
+    console.info(`   Success: ${response.success}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

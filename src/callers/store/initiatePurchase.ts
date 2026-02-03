@@ -11,7 +11,7 @@ dotenv.config();
  */
 async function main() {
   try {
-    console.log('🚀 Setting up OncadeClient...\n');
+    console.info('🚀 Setting up OncadeClient...\n');
 
     // Initialize client
     const client = new OncadeClient({
@@ -25,12 +25,12 @@ async function main() {
     const amount = parseInt(process.env.ONCADE_AMOUNT || '999'); // Default $9.99
     const paymentMethod = process.env.ONCADE_PAYMENT_METHOD || 'credit';
 
-    console.log('💳 Initiating purchase');
-    console.log(`   User: ${userRef}`);
-    console.log(`   Product ID: ${productId}`);
-    console.log(`   Amount: $${(amount / 100).toFixed(2)}`);
-    console.log(`   Payment Method: ${paymentMethod}\n`);
-    console.log('⏳ Calling API...\n');
+    console.info('💳 Initiating purchase');
+    console.info(`   User: ${userRef}`);
+    console.info(`   Product ID: ${productId}`);
+    console.info(`   Amount: $${(amount / 100).toFixed(2)}`);
+    console.info(`   Payment Method: ${paymentMethod}\n`);
+    console.info('⏳ Calling API...\n');
 
     const response = await client.store.initiatePurchase({
       userRef,
@@ -39,15 +39,15 @@ async function main() {
       paymentMethod,
     });
 
-    console.log('✅ Success! Purchase initiated:\n');
-    console.log('📋 Summary:');
-    console.log(`   Purchase ID: ${response.purchase.id}`);
-    console.log(`   User: ${response.purchase.userRef}`);
-    console.log(`   Product ID: ${response.purchase.productId}`);
-    console.log(`   Amount: $${(response.purchase.amount / 100).toFixed(2)}`);
-    console.log(`   Payment Method: ${response.purchase.paymentMethod}`);
-    console.log(`   Status: ${response.purchase.status}`);
-    console.log(`   Created: ${response.purchase.createdAt}`);
+    console.info('✅ Success! Purchase initiated:\n');
+    console.info('📋 Summary:');
+    console.info(`   Purchase ID: ${response.purchase.id}`);
+    console.info(`   User: ${response.purchase.userRef}`);
+    console.info(`   Product ID: ${response.purchase.productId}`);
+    console.info(`   Amount: $${(response.purchase.amount / 100).toFixed(2)}`);
+    console.info(`   Payment Method: ${response.purchase.paymentMethod}`);
+    console.info(`   Status: ${response.purchase.status}`);
+    console.info(`   Created: ${response.purchase.createdAt}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));
