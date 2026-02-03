@@ -1,83 +1,69 @@
+import { CreditDebitBreakdownItem } from './credit';
+
 export interface CreateDebitRequest {
   /** Currency ID */
   currencyId: string;
   /** User reference */
   userRef: string;
-  /** Amount to debit */
-  amount: string;
+  /** Amount to debit in units */
+  amountUnits: string;
+  /** Reason: 'refund' or 'adjustment' */
+  reason?: 'refund' | 'adjustment';
+  /** Optional order ID */
+  orderId?: string;
   /** Optional description */
   description?: string;
 }
 
 export interface CreateDebitResponse {
-  /** Debit transaction */
-  transaction: {
-    _id: string;
-    currencyId: string;
-    userRef: string;
-    type: 'debit';
-    amount: string;
-    description?: string;
-    createdAt: string;
-  };
-  /** Updated balance */
-  balance: string;
+  /** Journal entry ID */
+  journalId: string;
+  /** New balance in units */
+  newBalanceUnits: string;
+  /** Transaction breakdown */
+  breakdown: CreditDebitBreakdownItem[];
 }
 
-/**
- * Individual debit item in batch
- */
-export interface BatchDebitItem {
-  /** User reference */
+/** Recipient for batch debit: credit to a user */
+export interface BatchDebitRecipientUser {
   userRef: string;
-  /** Debit amount */
-  amount: string;
-  /** Optional metadata */
-  metadata?: Record<string, string | number | boolean>;
+  amountUnits: string;
+  description?: string;
 }
 
+/** Recipient for batch debit: credit to pool */
+export interface BatchDebitRecipientPool {
+  toPool: true;
+  amountUnits: string;
+  description?: string;
+}
+
+export type BatchDebitRecipient = BatchDebitRecipientUser | BatchDebitRecipientPool;
+
 /**
- * Request parameters for batch debit
+ * Request parameters for batch debit (debit from one source, distribute to many)
  */
 export interface BatchDebitRequest {
   /** Currency ID */
   currencyId: string;
-  /** Array of debit items */
-  debits: BatchDebitItem[];
-}
-
-/**
- * Individual debit result in batch response
- */
-export interface BatchDebitResult {
-  /** User reference */
-  userRef: string;
-  /** Success status */
-  success: boolean;
-  /** Journal entry ID (if successful) */
-  journalId?: string;
-  /** Transaction ID (if successful) */
-  transactionId?: string;
-  /** New balance (if successful) */
-  newBalance?: string;
-  /** Error message (if failed) */
-  error?: string;
+  /** Source user to debit from */
+  sourceUserRef: string;
+  /** Recipients (users or pool) */
+  recipients: BatchDebitRecipient[];
+  /** Optional order ID */
+  orderId?: string;
+  /** Optional note */
+  note?: string;
 }
 
 /**
  * Response for batch debit
  */
 export interface BatchDebitResponse {
-  /** Currency ID */
-  currencyId: string;
-  /** Total number of debits */
-  total: number;
-  /** Number of successful debits */
-  successful: number;
-  /** Number of failed debits */
-  failed: number;
-  /** Array of results */
-  results: BatchDebitResult[];
-  /** Creation timestamp */
-  createdAt: string;
+  /** Journal entry ID */
+  journalId: string;
+  /** New balance of source user in units */
+  newBalanceUnits: string;
+  /** Transaction breakdown */
+  breakdown: CreditDebitBreakdownItem[];
 }

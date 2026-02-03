@@ -89,13 +89,13 @@ export class CampaignAPI {
    * @returns Promise with created event response
    */
   async createCampaignEvent(request: CreateCampaignEventRequest): Promise<CreateCampaignEventResponse> {
-    if (!request.campaignId || !request.userId || !request.eventType) {
-      throw new Error('Campaign ID, user ID, and event type are required');
+    if (!request.campaignId || !request.eventCode || !request.userRef) {
+      throw new Error('Campaign ID, event code, and user reference are required');
     }
     const { campaignId, ...eventData } = request;
     const response = await this.httpClient.post<CreateCampaignEventResponse>(
       `/v1/campaign/${campaignId}/events`,
-      eventData,
+      { eventCode: eventData.eventCode, userRef: eventData.userRef },
       {
         headers: {
           'Idempotency-Key': generateIdempotencyKey(),
@@ -128,13 +128,12 @@ export class CampaignAPI {
    * @returns Promise with withdrawal response
    */
   async withdrawFromCampaign(request: WithdrawCampaignRequest): Promise<WithdrawCampaignResponse> {
-    if (!request.campaignId || !request.amount || !request.destinationAddress) {
-      throw new Error('Campaign ID, amount, and destination address are required');
+    if (!request.campaignId) {
+      throw new Error('Campaign ID is required');
     }
-    const { campaignId, ...withdrawData } = request;
     const response = await this.httpClient.post<WithdrawCampaignResponse>(
-      `/v1/campaign/${campaignId}/withdraw`,
-      withdrawData,
+      `/v1/campaign/${request.campaignId}/withdraw`,
+      {},
       {
         headers: {
           'Idempotency-Key': generateIdempotencyKey(),

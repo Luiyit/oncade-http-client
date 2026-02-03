@@ -20,8 +20,13 @@ async function main() {
     });
 
     // User reference and item ID from environment or mock
-    const userRef = process.env.ONCADE_USER_REF || 'test_user_ref';
-    const itemId = process.env.ONCADE_ITEM_ID || process.env.ONCADE_SUBSCRIPTION_PRODUCT_ID || 'test_item_id';
+    const userRef = process.env.ONCADE_USER_REF || 
+                    'test_user_ref';
+                    
+    const itemId =  process.env.ONCADE_SUBSCRIPTION_PRODUCT_ID_V2 || 
+                    process.env.ONCADE_ITEM_ID || 
+                    process.env.ONCADE_SUBSCRIPTION_PRODUCT_ID || 
+                    'test_item_id';
 
     console.log('📝 Creating subscription');
     console.log(`   User: ${userRef}`);
@@ -37,10 +42,9 @@ async function main() {
     console.log('📋 Summary:');
     console.log(`   Subscription ID: ${response.subscription.subscriptionId}`);
     console.log(`   Item ID: ${response.subscription.itemId}`);
-    console.log(`   User: ${response.subscription.userRef}`);
     console.log(`   Status: ${response.subscription.status}`);
-    console.log(`   Current Period: ${response.subscription.currentPeriodStart} to ${response.subscription.currentPeriodEnd}`);
-    console.log(`   Message: ${response.message}`);
+    console.log(`   Plan: ${response.subscription.planCode} (${response.subscription.planId})`);
+    if (response.message) console.log(`   Message: ${response.message}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

@@ -3,24 +3,28 @@ export interface CreateCreditRequest {
   currencyId: string;
   /** User reference */
   userRef: string;
-  /** Amount to credit */
-  amount: string;
+  /** Amount to credit in units */
+  amountUnits: string;
+  /** Optional order ID */
+  orderId?: string;
   /** Optional description */
   description?: string;
 }
 
+export interface CreditDebitBreakdownItem {
+  participant: 'user' | 'pool';
+  direction: 'debit' | 'credit';
+  userRef?: string;
+  amountUnits: string;
+  description?: string;
+}
+
 export interface CreateCreditResponse {
-  /** Credit transaction */
-  transaction: {
-    _id: string;
-    currencyId: string;
-    userRef: string;
-    type: 'credit';
-    amount: string;
-    description?: string;
-    createdAt: string;
-  };
-  /** Updated balance */
-  balance: string;
+  /** Journal entry ID */
+  journalId: string;
+  /** New balance in units */
+  newBalanceUnits: string;
+  /** Transaction breakdown */
+  breakdown: CreditDebitBreakdownItem[];
 }
 

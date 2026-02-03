@@ -16,8 +16,8 @@ export class DebitAPI {
    * @returns Promise with debit response
    */
   async createDebit(request: CreateDebitRequest): Promise<CreateDebitResponse> {
-    if (!request.currencyId || !request.userRef || !request.amount) {
-      throw new Error('Currency ID, user reference, and amount are required');
+    if (!request.currencyId || !request.userRef || !request.amountUnits) {
+      throw new Error('Currency ID, user reference, and amountUnits are required');
     }
     const response = await this.httpClient.post<CreateDebitResponse>(
       '/v1/vc/debits',
@@ -37,8 +37,8 @@ export class DebitAPI {
    * @returns Promise with batch debit response
    */
   async batchDebit(request: BatchDebitRequest): Promise<BatchDebitResponse> {
-    if (!request.currencyId || !request.debits || request.debits.length === 0) {
-      throw new Error('Currency ID and at least one debit are required');
+    if (!request.currencyId || !request.sourceUserRef || !request.recipients || request.recipients.length === 0) {
+      throw new Error('Currency ID, source user reference, and at least one recipient are required');
     }
     const response = await this.httpClient.post<BatchDebitResponse>(
       '/v1/vc/batch-debits',

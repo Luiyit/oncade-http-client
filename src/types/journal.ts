@@ -9,13 +9,21 @@ export interface ListJournalsRequest {
   limit?: number;
 }
 
+export interface JournalPostingAccount {
+  type: 'pool' | 'user';
+  address?: string;
+  userRef?: string;
+}
+
+export interface JournalPosting {
+  account: JournalPostingAccount;
+  deltaUnits: string;
+}
+
 export interface JournalEntry {
   _id: string;
-  currencyId: string;
-  userRef: string;
   type: 'credit' | 'debit';
-  amount: string;
-  description?: string;
+  postings: JournalPosting[];
   createdAt: string;
 }
 

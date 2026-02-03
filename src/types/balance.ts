@@ -10,9 +10,9 @@ export interface GetBalanceResponse {
   currencyId: string;
   /** User reference */
   userRef: string;
-  /** Balance amount */
-  balance: string;
-  /** Wallet address */
-  address?: string;
+  /** Balance amount in units */
+  balanceUnits: string;
+  /** Last update timestamp */
+  updatedAt: string;
 }
 

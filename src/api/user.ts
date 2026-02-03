@@ -42,9 +42,10 @@ export class UserAPI {
     if (!request.userRef) {
       throw new Error('User reference is required');
     }
+    const { userRef, ...params } = request;
     const response = await this.httpClient.get<GetUserPurchasesResponse>(
-      `/v1/users/${request.userRef}/purchases`,
-      { params: { limit: request.limit } }
+      `/v1/users/${userRef}/purchases`,
+      { params }
     );
     return response.data;
   }

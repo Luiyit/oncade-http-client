@@ -20,8 +20,8 @@ export class CashoutAPI {
    * @returns Promise with cashout response
    */
   async createCashout(request: CreateCashoutRequest): Promise<CreateCashoutResponse> {
-    if (!request.currencyId || !request.userRef || !request.amount || !request.destinationAddress) {
-      throw new Error('All required fields must be provided for cashout creation');
+    if (!request.currencyId || !request.userRef || !request.units) {
+      throw new Error('Currency ID, user reference, and units are required for cashout creation');
     }
     const response = await this.httpClient.post<CreateCashoutResponse>(
       '/v1/vc/cashouts',
@@ -78,16 +78,15 @@ export class CashoutAPI {
     if (!request.cashoutRequestId) {
       throw new Error('Cashout request ID is required');
     }
-    const response = await this.httpClient.post<RejectCashoutResponse>(
+    await this.httpClient.post(
       `/v1/vc/cashouts/${request.cashoutRequestId}/reject`,
-      {},
+      request.reason != null ? { reason: request.reason } : {},
       {
         headers: {
           'Idempotency-Key': generateIdempotencyKey(),
         },
       }
     );
-    return response.data;
   }
 }
 

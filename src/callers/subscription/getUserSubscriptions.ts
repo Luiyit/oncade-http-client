@@ -34,22 +34,16 @@ async function main() {
       offset,
     });
 
-    console.log('✅ Success! User subscriptions retrieved:', response);
-    console.log(`   Total Subscriptions: ${response.total}`);
+    console.log('✅ Success! User subscriptions retrieved');
     console.log(`   Returned: ${response.subscriptions.length}\n`);
 
     if (response.subscriptions.length > 0) {
       console.log('📦 Subscriptions:');
-      response.subscriptions.forEach((subscription, index) => {
-        console.log(`\n   ${index + 1}. Subscription ID: ${subscription.subscriptionId}`);
-        console.log(`      Item ID: ${subscription.itemId}`);
-        console.log(`      Status: ${subscription.status}`);
-        console.log(`      Current Period: ${subscription.currentPeriodStart} to ${subscription.currentPeriodEnd}`);
-        console.log(`      Cancel at Period End: ${subscription.cancelAtPeriodEnd}`);
-        if (subscription.cancelledAt) {
-          console.log(`      Cancelled At: ${subscription.cancelledAt}`);
-        }
-        console.log(`      Created: ${subscription.createdAt}`);
+      response.subscriptions.forEach((sub, index) => {
+        console.log(`\n   ${index + 1}. Subscription ID: ${sub.subscriptionId}`);
+        console.log(`      Item ID: ${sub.itemId}`);
+        console.log(`      Status: ${sub.status}`);
+        console.log(`      Plan: ${sub.planCode} (${sub.planId})`);
       });
     } else {
       console.log('   No subscriptions found for this user');

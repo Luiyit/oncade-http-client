@@ -106,7 +106,7 @@ export class AuthAPI {
     }
     const response = await this.httpClient.post<RemoveLinkResponse>(
       '/v1/users/link/remove',
-      request,
+      { user_ref: request.userRef },
       {
         headers: {
           'Idempotency-Key': generateIdempotencyKey(),

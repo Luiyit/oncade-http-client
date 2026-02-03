@@ -21,7 +21,7 @@ async function main() {
 
     // Parameters from environment or mock
     const gameId = process.env.ONCADE_GAME_ID || 'test-game';
-    const itemId = process.env.ONCADE_ITEM_ID || 'test-item';
+    const itemId = process.env.ONCADE_SUBSCRIPTION_PRODUCT_ID || 'test-item';
     const redirectUrl = process.env.ONCADE_REDIRECT_URL;
     const affiliateCode = process.env.ONCADE_AFFILIATE_CODE;
     const dealCode = process.env.ONCADE_DEAL_CODE;

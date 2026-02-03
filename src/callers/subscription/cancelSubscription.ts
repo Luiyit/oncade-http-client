@@ -35,15 +35,8 @@ async function main() {
 
     console.log('✅ Success! Subscription cancelled:\n');
     console.log('📋 Summary:');
-    console.log(`   Subscription ID: ${response.subscription.subscriptionId}`);
-    console.log(`   Item ID: ${response.subscription.itemId}`);
-    console.log(`   User: ${response.subscription.userRef}`);
-    console.log(`   Status: ${response.subscription.status}`);
-    console.log(`   Cancel at Period End: ${response.subscription.cancelAtPeriodEnd}`);
-    if (response.subscription.cancelledAt) {
-      console.log(`   Cancelled At: ${response.subscription.cancelledAt}`);
-    }
-    console.log(`   Message: ${response.message}`);
+    console.log(`   Success: ${response.success}`);
+    console.log(`   Subscription ID: ${response.subscriptionId}`);
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

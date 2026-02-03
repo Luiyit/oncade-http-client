@@ -14,8 +14,8 @@ export class CreditAPI {
    * @returns Promise with credit response
    */
   async createCredit(request: CreateCreditRequest): Promise<CreateCreditResponse> {
-    if (!request.currencyId || !request.userRef || !request.amount) {
-      throw new Error('Currency ID, user reference, and amount are required');
+    if (!request.currencyId || !request.userRef || !request.amountUnits) {
+      throw new Error('Currency ID, user reference, and amountUnits are required');
     }
     const response = await this.httpClient.post<CreateCreditResponse>(
       '/v1/vc/credits',

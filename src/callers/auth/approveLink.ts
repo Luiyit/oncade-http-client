@@ -40,12 +40,6 @@ async function main() {
     console.log('✅ Success! Account link approved:\n');
     console.log('📋 Summary:');
     console.log(`   Success: ${response.success}`);
-    if (response.user) {
-      console.log(`   User ID: ${response.user.id}`);
-      console.log(`   Email: ${response.user.email}`);
-      console.log(`   Game ID: ${response.user.gameId}`);
-      console.log(`   Linked At: ${response.user.linkedAt}`);
-    }
 
   } catch (error) {
     console.error('❌ Error occurred:', error instanceof Error ? error.message : String(error));

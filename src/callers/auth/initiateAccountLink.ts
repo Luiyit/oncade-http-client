@@ -35,9 +35,8 @@ async function main() {
 
     console.log('✅ Success! Account link initiated:\n');
     console.log('📋 Summary:');
-    console.log(`   Success: ${response.success}`);
     console.log(`   Session Key: ${response.sessionKey}`);
-    if (response.url) console.log(`   URL: ${response.url}`);
+    console.log(`   URL: ${response.url}`);
     console.log('\n💡 Use this session key with getLinkStatus to check the link status');
     console.log(`   Export it: export ONCADE_USER_SESSION_KEY="${response.sessionKey}"`);
 

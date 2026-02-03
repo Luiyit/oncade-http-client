@@ -3,6 +3,8 @@ import { generateIdempotencyKey } from '../utils';
 import {
   GetUserSubscriptionsRequest,
   GetUserSubscriptionsResponse,
+  GetSubscriptionByItemRequest,
+  GetSubscriptionByItemResponse,
   CreateSubscriptionRequest,
   CreateSubscriptionResponse,
   CancelSubscriptionRequest,
@@ -30,6 +32,21 @@ export class SubscriptionAPI {
   }
 
   /**
+   * Get subscription by item ID
+   * @param request - Get subscription by item request parameters
+   * @returns Promise with subscription details
+   */
+  async getSubscriptionByItem(request: GetSubscriptionByItemRequest): Promise<GetSubscriptionByItemResponse> {
+    if (!request.userRef || !request.itemId) {
+      throw new Error('User reference and item ID are required');
+    }
+    const response = await this.httpClient.get<GetSubscriptionByItemResponse>(
+      `/v1/users/${request.userRef}/subscriptions/${request.itemId}`
+    );
+    return response.data;
+  }
+
+  /**
    * Create a subscription
    * @param request - Create subscription request parameters
    * @returns Promise with created subscription response
@@ -39,6 +56,9 @@ export class SubscriptionAPI {
       throw new Error('User reference and item ID are required');
     }
     const { userRef, itemId } = request;
+    console.log(`Creating subscription for user`);
+    console.log(`/v1/users/${userRef}/subscriptions/${itemId}`);
+    
     const response = await this.httpClient.post<CreateSubscriptionResponse>(
       `/v1/users/${userRef}/subscriptions/${itemId}`,
       {},

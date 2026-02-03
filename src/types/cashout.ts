@@ -3,28 +3,20 @@ export interface CreateCashoutRequest {
   currencyId: string;
   /** User reference */
   userRef: string;
-  /** Amount to cash out */
-  amount: string;
-  /** Destination address */
-  destinationAddress: string;
+  /** Units to cash out */
+  units: string;
 }
 
 export interface CreateCashoutResponse {
-  /** Cashout transaction */
-  cashout: {
-    _id: string;
-    currencyId: string;
-    userRef: string;
-    amount: string;
-    destinationAddress: string;
-    status: string;
-    createdAt: string;
-  };
+  /** Cashout request ID */
+  cashoutRequestId: string;
 }
 
 export interface ListCashoutsRequest {
   /** Currency ID */
   currencyId?: string;
+  /** Status filter (e.g. pendingReview) */
+  status?: string;
   /** User reference */
   userRef?: string;
   /** Page number */
@@ -33,20 +25,20 @@ export interface ListCashoutsRequest {
   limit?: number;
 }
 
-export interface Cashout {
+export interface CashoutListItem {
   _id: string;
-  currencyId: string;
   userRef: string;
-  amount: string;
-  destinationAddress: string;
+  unitsRequested: string;
   status: string;
-  createdAt: string;
-  updatedAt?: string;
+  requestedRate: {
+    baseUnitsPerVcUnit: string;
+    capturedAt: string;
+  };
 }
 
 export interface ListCashoutsResponse {
-  /** List of cashouts */
-  items: Cashout[];
+  /** List of cashout requests */
+  items: CashoutListItem[];
   /** Pagination information */
   pagination: {
     page: number;
@@ -64,17 +56,21 @@ export interface ApproveCashoutRequest {
 }
 
 export interface ApproveCashoutResponse {
-  /** Updated cashout */
-  cashout: Cashout;
+  /** Conversion transaction ID */
+  transactionId: string;
+  /** Base units per VC unit used */
+  usedBaseUnitsPerVcUnit: string;
+  /** Converted base units amount */
+  convertedBaseUnits: string;
 }
 
 export interface RejectCashoutRequest {
   /** Cashout request ID */
   cashoutRequestId: string;
+  /** Optional reason */
+  reason?: string;
 }
 
-export interface RejectCashoutResponse {
-  /** Updated cashout */
-  cashout: Cashout;
-}
+/** Reject returns 204 No Content; no response body */
+export type RejectCashoutResponse = void;
 

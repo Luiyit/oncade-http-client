@@ -38,15 +38,16 @@ async function main() {
     });
 
     console.log(JSON.stringify(response, null, 2));
-    
-    console.log('✅ Success! Link status retrieved:\n');
+
+    console.log('✅ Success! Link details retrieved:\n');
     console.log('📋 Summary:');
-    console.log(`   Status: ${response.status}`);
-    if (response.user) {
-      console.log(`   User ID: ${response.user.id}`);
-      console.log(`   Email: ${response.user.email}`);
-      console.log(`   Game ID: ${response.user.gameId}`);
-      console.log(`   Linked At: ${response.user.linkedAt}`);
+    console.log(`   Namespace: ${response.namespaceType}`);
+    if (response.gameId) console.log(`   Game ID: ${response.gameId}`);
+    if (response.gameName) console.log(`   Game: ${response.gameName}`);
+    console.log(`   Prefilled email: ${response.prefilledEmail}`);
+    if (response.userRef) console.log(`   User ref: ${response.userRef}`);
+    if (response.spendPermission) {
+      console.log(`   Spend permission: ${response.spendPermission.tenantName} (${response.spendPermission.networkKey})`);
     }
 
   } catch (error) {

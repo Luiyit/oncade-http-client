@@ -6,12 +6,10 @@ export interface InitiateAccountLinkRequest {
 }
 
 export interface InitiateAccountLinkResponse {
-  /** Success status */
-  success: boolean;
+  /** URL for the user to complete linking */
+  url: string;
   /** Session key for tracking */
   sessionKey: string;
-  /** Redirect URL if applicable */
-  url?: string;
 }
 
 export interface GetLinkStatusRequest {
@@ -19,16 +17,31 @@ export interface GetLinkStatusRequest {
   session: string;
 }
 
+/** Spend permission when linking with token allowance */
+export interface SpendPermission {
+  tenantId: string;
+  tenantName: string;
+  tokenAddress: string;
+  allowanceUSDC: string;
+  periodSeconds: number;
+  durationSeconds: number;
+  tenantModuleAddress: string;
+  networkKey: string;
+}
+
 export interface GetLinkStatusResponse {
-  /** Link status */
-  status: string;
-  /** User information if linked */
-  user?: {
-    id: string;
-    email: string;
-    gameId: string;
-    linkedAt: string;
-  };
+  /** Namespace type: 'game' or 'campaign' */
+  namespaceType: string;
+  /** Game ID (when namespace is game) */
+  gameId?: string;
+  /** Game name (when namespace is game) */
+  gameName?: string;
+  /** Prefilled email from the link session */
+  prefilledEmail: string;
+  /** User reference once the session is approved */
+  userRef?: string;
+  /** Spend permission request when set */
+  spendPermission?: SpendPermission;
 }
 
 export interface ApproveLinkRequest {
@@ -39,13 +52,6 @@ export interface ApproveLinkRequest {
 export interface ApproveLinkResponse {
   /** Success status */
   success: boolean;
-  /** User information after approval */
-  user?: {
-    id: string;
-    email: string;
-    gameId: string;
-    linkedAt: string;
-  };
 }
 
 export interface DeclineLinkRequest {
